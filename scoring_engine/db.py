@@ -31,7 +31,7 @@ if 'sqlite' in config.db_uri:
     # so we have to manually set it to something else
     isolation_level = "READ UNCOMMITTED"
 
-session = scoped_session(sessionmaker(bind=create_engine(config.db_uri, isolation_level=isolation_level)))
+session = scoped_session(sessionmaker(bind=create_engine(config.db_uri, isolation_level=isolation_level, pool_size=15, max_overflow=20)))
 
 db_salt = bcrypt.gensalt()
 
